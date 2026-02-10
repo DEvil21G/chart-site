@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<title>ورود</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<button class="theme-btn" onclick="toggleTheme()">🌙 / ☀️</button>
+
+<div class="card">
+<h2>ورود</h2>
+
+<p id="error" style="color:red;display:none">
+❌ نام کاربری یا رمز عبور یا کد امنیتی صحیح نیست
+</p>
+
+<input id="user" placeholder="نام کاربری" class="input-field">
+<input id="pass" type="password" placeholder="رمز عبور" class="input-field">
+
+<p id="captcha"></p>
+<input id="cap" placeholder="کد امنیتی" class="input-field">
+
+<button onclick="login()" class="btn">ورود</button>
+</div>
+
+<script>
+function toggleTheme(){
+    document.body.classList.toggle("dark");
+    localStorage.setItem("theme",
+        document.body.classList.contains("dark") ? "dark" : "light"
+    );
+}
+if(localStorage.getItem("theme")=="dark")
+    document.body.classList.add("dark");
+
+let code=Math.floor(1000+Math.random()*9000);
+captcha.innerText="کد امنیتی: "+code;
+
+function login(){
+    let su=localStorage.getItem("username");
+    let sp=localStorage.getItem("password");
+    let u=document.getElementById("user").value;
+    let p=document.getElementById("pass").value;
+    let c=document.getElementById("cap").value;
+
+    if(u!==su || p!==sp || c!=code){
+        error.style.display="block";
+        return;
+    }
+
+    localStorage.setItem("user", u);
+    location.href="index.html";
+}
+</script>
+</body>
+</html>
